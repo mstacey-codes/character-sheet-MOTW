@@ -9,6 +9,7 @@ import TopBar from "./layout/TopBar";
 
 import UserProfile from "./UserProfile";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
+import PleaseLogin from "./authentication/PleaseLogin";
 import getCurrentUser from "../services/getCurrentUser";
 
 import HomePage from "./HomePage";
@@ -38,6 +39,7 @@ const App = (props) => {
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
+        <Route exact path="/please-login" component={PleaseLogin} />
         <AuthenticatedRoute exact path="/profile" component={UserProfile} user={currentUser} />
       </Switch>
     </Router>

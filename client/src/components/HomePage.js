@@ -17,7 +17,6 @@ const HomePage = ({ user }) => {
       </h2>
     );
   }
-  console.log(user);
 
   return (
     <>
