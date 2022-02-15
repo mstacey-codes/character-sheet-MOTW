@@ -15,6 +15,21 @@ class User extends uniqueFunc(Model) {
     return "users";
   }
 
+  static get relationMappings() {
+    const Character = require("./Character.js");
+
+    return {
+      characters: {
+        relation: Model.HasManyRelation,
+        modelClass: Character,
+        join: {
+          from: "users.id",
+          to: "characters.userId",
+        },
+      },
+    };
+  }
+
   set password(newPassword) {
     this.cryptedPassword = Bcrypt.hashSync(newPassword, saltRounds);
   }

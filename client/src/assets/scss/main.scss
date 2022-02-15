@@ -1,6 +1,12 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
+
+$charm: #540d6e;
+$cool: #ff9505;
+$sharp: #3891a6;
+$tough: #cc2936;
+$weird: #436436;
 // place global css here
 *,
 *::before,
