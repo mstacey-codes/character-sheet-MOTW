@@ -14,6 +14,7 @@ import getCurrentUser from "../services/getCurrentUser";
 import HomePage from "./HomePage";
 import UserProfile from "./UserProfile";
 import CharacterCreationForm from "./CharacterCreationForm";
+import AddCharacterInfoForm from "./AddCharacterInfoForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -46,6 +47,12 @@ const App = (props) => {
           exact
           path="/create-character"
           component={CharacterCreationForm}
+          user={currentUser}
+        />
+        <AuthenticatedRoute
+          exact
+          path="/create-character/more"
+          component={AddCharacterInfoForm}
           user={currentUser}
         />
       </Switch>

@@ -12,7 +12,6 @@ const CharacterCreationForm = ({ user }) => {
     name: "",
     hunterIndex: "",
   });
-
   const [hunterData, setHunterData] = useState([]);
   const [errors, setErrors] = useState({});
 
