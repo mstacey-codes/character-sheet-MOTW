@@ -7,12 +7,13 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 
-import UserProfile from "./UserProfile";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import PleaseLogin from "./authentication/PleaseLogin";
 import getCurrentUser from "../services/getCurrentUser";
 
 import HomePage from "./HomePage";
+import UserProfile from "./UserProfile";
+import CharacterCreationForm from "./CharacterCreationForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -41,6 +42,12 @@ const App = (props) => {
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/please-login" component={PleaseLogin} />
         <AuthenticatedRoute exact path="/profile" component={UserProfile} user={currentUser} />
+        <AuthenticatedRoute
+          exact
+          path="/create-character"
+          component={CharacterCreationForm}
+          user={currentUser}
+        />
       </Switch>
     </Router>
   );
