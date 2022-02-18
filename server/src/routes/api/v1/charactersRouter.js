@@ -2,6 +2,8 @@ import express from "express";
 import objection from "objection";
 import { Character } from "../../../models/index.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
+import CharacterSerializer from "../../serializers/CharacterSerializer.js";
+import characterInfoRouter from "./characterInfoRouter.js";
 
 const { ValidationError } = objection;
 
@@ -29,5 +31,28 @@ charactersRouter.post("/", async (req, res) => {
     return res.status(500).json({ errors: error });
   }
 });
+
+charactersRouter.get("/:charId", async (req, res) => {
+  const characterIndex = req.params.charId;
+  try {
+    const character = await Character.query().findById(characterIndex);
+    const serializedCharacter = await CharacterSerializer.getDetails(character);
+    return res.status(200).json({ character: serializedCharacter });
+  } catch (error) {
+    return res.status(500).json({ errors: error });
+  }
+});
+
+charactersRouter.get("/:charId/info", async (req, res) => {
+  const characterIndex = req.params.charId;
+  try {
+    const character = await Character.query().findById(characterIndex);
+    return res.status(200).json({ character });
+  } catch (error) {
+    return res.status(500).json({ errors: error });
+  }
+});
+
+charactersRouter.use("/:charId/info", characterInfoRouter);
 
 export default charactersRouter;

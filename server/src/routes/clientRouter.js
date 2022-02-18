@@ -8,8 +8,9 @@ const clientRoutes = [
   "/user-sessions/new",
   "/users/new",
   "/profile",
-  "/create-character",
-  "/create-character/more",
+  "/new-character",
+  "/new-character/:charId/:hunterIndex",
+  "/bananas/:test",
 ];
 router.get(clientRoutes, (req, res) => {
   res.sendFile(getClientIndexPath());

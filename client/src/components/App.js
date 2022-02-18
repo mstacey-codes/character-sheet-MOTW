@@ -22,7 +22,6 @@ const App = (props) => {
     try {
       const user = await getCurrentUser();
       setCurrentUser(user);
-      console.log(currentUser);
     } catch (err) {
       setCurrentUser(null);
     }
@@ -45,16 +44,13 @@ const App = (props) => {
         <AuthenticatedRoute exact path="/profile" component={UserProfile} user={currentUser} />
         <AuthenticatedRoute
           exact
-          path="/create-character"
+          path="/new-character"
           component={CharacterCreationForm}
           user={currentUser}
         />
-        <AuthenticatedRoute
-          exact
-          path="/create-character/more"
-          component={AddCharacterInfoForm}
-          user={currentUser}
-        />
+        <Route exact path="/new-character/:charId/:hunterIndex">
+          <AddCharacterInfoForm user={currentUser} />
+        </Route>
       </Switch>
     </Router>
   );

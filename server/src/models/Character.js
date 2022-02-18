@@ -8,6 +8,8 @@ class Character extends Model {
   static get relationMappings() {
     const User = require("./User.js");
     const Hunter = require("./Hunter.js");
+    const Stats = require("./Stats.js");
+    const Look = require("./Look.js");
 
     return {
       user: {
@@ -25,6 +27,24 @@ class Character extends Model {
         join: {
           from: "characters.hunterIndex",
           to: "hunters.index",
+        },
+      },
+
+      stats: {
+        relation: Model.HasOneRelation,
+        modelClass: Stats,
+        join: {
+          from: "characters.id",
+          to: "stats.characterId",
+        },
+      },
+
+      look: {
+        relation: Model.HasOneRelation,
+        modelClass: Look,
+        join: {
+          from: "characters.id",
+          to: "looks.characterId",
         },
       },
     };

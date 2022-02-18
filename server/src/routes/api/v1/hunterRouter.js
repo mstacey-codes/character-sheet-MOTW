@@ -14,7 +14,6 @@ huntersRouter.get("/", async (req, res) => {
 });
 
 huntersRouter.get("/:index", async (req, res) => {
-  console.log(req.params);
   const hunterIndex = req.params.index;
 
   try {

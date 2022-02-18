@@ -2,8 +2,6 @@ import React from "react";
 import LookTile from "./LookTile.js";
 
 const LookForm = (props) => {
-  console.log(props);
-
   let aura;
   if (props.look.aura) {
     const auraOptions = props.look.aura.map((aura, index) => {

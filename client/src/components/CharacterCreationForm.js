@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import ErrorList from "./layout/ErrorList";
 import translateServerErrors from "../services/translateServerErrors";
 
@@ -6,6 +7,12 @@ const CharacterCreationForm = ({ user }) => {
   if (!user) {
     return null;
   }
+
+  const [redirect, setRedirect] = useState({
+    shouldRedirect: false,
+    charId: "",
+    hunter: "",
+  });
 
   const [characterData, setCharacterData] = useState({
     userId: user.id,
@@ -24,7 +31,6 @@ const CharacterCreationForm = ({ user }) => {
         throw error;
       }
       const body = await response.json();
-      console.log(body.hunters);
       setHunterData(body.hunters);
       setCharacterData({ ...characterData, hunterIndex: body.hunters[0].index });
     } catch (error) {
@@ -46,7 +52,6 @@ const CharacterCreationForm = ({ user }) => {
   const chosenHunter = hunterData.find((element) => {
     return element.index === characterData.hunterIndex;
   });
-  console.log(chosenHunter);
 
   const postCharacter = async (newCharacterData) => {
     try {
@@ -70,7 +75,12 @@ const CharacterCreationForm = ({ user }) => {
       } else {
         const body = await response.json();
         setErrors([]);
-        console.log(happy);
+        setRedirect({
+          ...redirect,
+          shouldRedirect: true,
+          charId: body.character.id,
+          hunter: body.character.hunterIndex,
+        });
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
@@ -85,13 +95,16 @@ const CharacterCreationForm = ({ user }) => {
 
   const handleInputChange = (event) => {
     setCharacterData({ ...characterData, [event.currentTarget.name]: event.currentTarget.value });
-    console.log(characterData);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     postCharacter(characterData);
   };
+
+  if (redirect.shouldRedirect) {
+    return <Redirect push to={`/new-character/${redirect.charId}/${redirect.hunter}`} />;
+  }
 
   return (
     <>

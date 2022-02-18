@@ -1,7 +1,6 @@
 import React from "react";
 
 const LookTile = ({ look, name, id, handleInputChangeLook }) => {
-  console.log(name);
   return (
     <li>
       <label htmlFor={id} />

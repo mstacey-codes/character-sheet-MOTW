@@ -2,8 +2,6 @@ import React from "react";
 import RatingTile from "./RatingTile";
 
 const RatingForm = (props) => {
-  console.log(props);
-
   const ratingTiles = props.ratings.map((rating, index) => {
     return (
       <RatingTile
