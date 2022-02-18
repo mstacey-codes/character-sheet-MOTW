@@ -57,7 +57,7 @@ const LookForm = (props) => {
         <LookTile
           key={index + "eyes"}
           id={index + "eyes"}
-          name="clothes"
+          name="eyes"
           look={eyes}
           handleInputChangeLook={props.handleInputChangeLook}
         />
