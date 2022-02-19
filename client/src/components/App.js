@@ -13,6 +13,7 @@ import PleaseLogin from "./authentication/PleaseLogin";
 import getCurrentUser from "../services/getCurrentUser";
 
 import HomePage from "./HomePage";
+import CharacterSheet from "./CharacterSheet";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -41,6 +42,7 @@ const App = (props) => {
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/please-login" component={PleaseLogin} />
         <AuthenticatedRoute exact path="/profile" component={UserProfile} user={currentUser} />
+        <Route exact path="/character-sheet" component={CharacterSheet} />
       </Switch>
     </Router>
   );
