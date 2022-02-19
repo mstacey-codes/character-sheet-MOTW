@@ -3,6 +3,9 @@ import { Redirect } from "react-router-dom";
 import ErrorList from "./layout/ErrorList";
 import translateServerErrors from "../services/translateServerErrors";
 
+import AddCharacterInfoForm from "./AddCharacterInfoForm";
+import ClassTile from "./ClassTile";
+
 const CharacterCreationForm = ({ user }) => {
   if (!user) {
     return null;
@@ -20,6 +23,7 @@ const CharacterCreationForm = ({ user }) => {
     hunterIndex: "",
   });
   const [hunterData, setHunterData] = useState([]);
+
   const [errors, setErrors] = useState({});
 
   const getHunters = async () => {
@@ -46,11 +50,48 @@ const CharacterCreationForm = ({ user }) => {
     return null;
   }
 
+  ///
+  // if (selectedClassId !== null) {
+  //   const foundElement = classDescriptions.find(
+  //     (element) => element.id === selectedClassId
+  //   );
+  //   descriptionText = foundElement.description;
+  //   image = foundElement.image;
+  //   flavor = foundElement.flavor;
+  // }
+
+  const allClasses = hunterData.map((hunter) => {
+    let selected = "";
+    if (characterData.hunterIndex === hunter.index) {
+      console.log(true);
+      selected = "selected";
+    }
+    const hunterIndexClickHandler = (event) => {
+      console.log(event.currentTarget.value);
+      setCharacterData({ ...characterData, hunterIndex: hunter.index });
+    };
+
+    return (
+      <ClassTile
+        key={hunter.id}
+        id={hunter.id}
+        // hunterIndex={hunter.index}
+        // name="hunterIndex"
+        // value={hunter.index}
+        index={hunter.index}
+        hunter={hunter}
+        hunterIndexClickHandler={hunterIndexClickHandler}
+        selected={selected}
+      />
+    );
+  });
+
+  ///
   if (characterData.hunterIndex === "") {
     return null;
   }
-  const chosenHunter = hunterData.find((element) => {
-    return element.index === characterData.hunterIndex;
+  const chosenHunter = hunterData.find((hunterElement) => {
+    return hunterElement.index === characterData.hunterIndex;
   });
 
   const postCharacter = async (newCharacterData) => {
@@ -87,11 +128,11 @@ const CharacterCreationForm = ({ user }) => {
     }
   };
 
-  const dropDown = hunterData.map((hunter) => (
-    <option key={hunter.id} value={hunter.index}>
-      {hunter.name}
-    </option>
-  ));
+  // const dropDown = hunterData.map((hunter) => (
+  //   <option key={hunter.id} value={hunter.index}>
+  //     {hunter.name}
+  //   </option>
+  // ));
 
   const handleInputChange = (event) => {
     setCharacterData({ ...characterData, [event.currentTarget.name]: event.currentTarget.value });
@@ -102,15 +143,15 @@ const CharacterCreationForm = ({ user }) => {
     postCharacter(characterData);
   };
 
-  if (redirect.shouldRedirect) {
-    return <Redirect push to={`/new-character/${redirect.charId}/${redirect.hunter}`} />;
-  }
+  // if (redirect.shouldRedirect) {
+  //   return <Redirect push to={`/new-character/${redirect.charId}/${redirect.hunter}`} />;
+  // }
 
   return (
     <>
       <ErrorList errors={errors} />
       <form onSubmit={handleSubmit}>
-        <h3>Create a character: </h3>
+        <h3>Create a {characterData.hunterIndex} character: </h3>{" "}
         <label>
           What is your character's name?
           <input
@@ -121,25 +162,26 @@ const CharacterCreationForm = ({ user }) => {
             value={characterData.name}
           />
         </label>
-        <label htmlFor="hunterIndex">
+        {/* <label htmlFor="hunterIndex">
           What type of hunter is your character?
           <select
             id="hunterIndex"
             name="hunterIndex"
             onChange={handleInputChange}
-            preview="Select a character"
             value={characterData.hunterIndex}
           >
             {dropDown}
-          </select>
-          <div>
-            <h3>{chosenHunter.description}</h3>
-            <h3>{chosenHunter.flavor}</h3>
-          </div>
-          <div>
-            <input type="submit" value="Submit" />
-          </div>
-        </label>
+          </select> */}{" "}
+        {/* </label> */}
+        {allClasses}
+        <div>
+          <h6>{chosenHunter.description}</h6>
+          <h6>{chosenHunter.flavor}</h6>
+        </div>
+        <AddCharacterInfoForm hunterIndex={characterData.hunterIndex} name={characterData.name} />
+        <div>
+          <input type="submit" value="Submit" />
+        </div>
       </form>
     </>
   );
