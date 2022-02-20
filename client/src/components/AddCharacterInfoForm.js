@@ -90,8 +90,8 @@ const AddCharacterInfoForm = ({ hunterIndex, name }) => {
   // }
   // getFormOptions(hunterIndex);
   if (!formOptions.look || !formOptions.ratings) {
-    return null;
-    // return <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" />;
+    // return null;
+    return <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" />;
   }
 
   const postCharacter = async (stats, look) => {
