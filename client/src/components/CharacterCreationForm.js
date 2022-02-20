@@ -50,16 +50,6 @@ const CharacterCreationForm = ({ user }) => {
     return null;
   }
 
-  ///
-  // if (selectedClassId !== null) {
-  //   const foundElement = classDescriptions.find(
-  //     (element) => element.id === selectedClassId
-  //   );
-  //   descriptionText = foundElement.description;
-  //   image = foundElement.image;
-  //   flavor = foundElement.flavor;
-  // }
-
   const allClasses = hunterData.map((hunter) => {
     let selected = "";
     if (characterData.hunterIndex === hunter.index) {
@@ -75,9 +65,6 @@ const CharacterCreationForm = ({ user }) => {
       <ClassTile
         key={hunter.id}
         id={hunter.id}
-        // hunterIndex={hunter.index}
-        // name="hunterIndex"
-        // value={hunter.index}
         index={hunter.index}
         hunter={hunter}
         hunterIndexClickHandler={hunterIndexClickHandler}

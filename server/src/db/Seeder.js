@@ -12,8 +12,8 @@ class Seeder {
     await UserSeeder.seed();
     console.log("seeding hunters");
     await HunterSeeder.seed();
-    console.log("seeding characters");
-    await CharacterSeeder.seed();
+    // console.log("seeding characters");
+    // await CharacterSeeder.seed();
 
     console.log("Done!");
     await connection.destroy();

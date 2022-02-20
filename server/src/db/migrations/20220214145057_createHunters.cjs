@@ -10,6 +10,8 @@ exports.up = async (knex) => {
     table.bigIncrements("id").primary();
     table.string("name").notNullable().unique();
     table.string("index").notNullable().unique();
+    table.string("description").notNullable();
+    table.string("flavor").notNullable();
     table.timestamp("createdAt").defaultTo(knex.fn.now());
     table.timestamp("updatedAt").defaultTo(knex.fn.now());
   });
