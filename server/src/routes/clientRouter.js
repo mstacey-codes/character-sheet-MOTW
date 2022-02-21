@@ -9,7 +9,7 @@ const clientRoutes = [
   "/users/new",
   "/profile",
   "/character-sheet",
-  "/character-sheet/:charId/:hunterIndex",
+  "/character-sheet/:charId",
   "/new-character",
   "/new-character/:charId/:hunterIndex",
   "/new-character/:charId/flake",

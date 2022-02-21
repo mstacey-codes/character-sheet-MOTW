@@ -8,6 +8,7 @@ class Character extends Model {
   static get relationMappings() {
     const User = require("./User.js");
     const Hunter = require("./Hunter.js");
+    const DivineTraits = require("./classSpecificModels/DivineTraits.js");
 
     return {
       user: {
@@ -25,6 +26,15 @@ class Character extends Model {
         join: {
           from: "characters.hunterIndex",
           to: "hunters.index",
+        },
+      },
+
+      divineTraits: {
+        relation: Model.HasOneRelation,
+        modelClass: DivineTraits,
+        join: {
+          from: "characters.id",
+          to: "divineTraits.characterId",
         },
       },
     };
