@@ -2,15 +2,44 @@
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
 
-$charm: #540d6e;
+$charm: #6b128b;
 $cool: #ff9505;
 $sharp: #3891a6;
 $tough: #cc2936;
 $weird: #436436;
 // place global css here
 
+.Charm {
+  color: $charm;
+}
+
+.Cool {
+  color: $cool;
+}
+
+.Sharp {
+  color: $sharp;
+}
+
+.Tough {
+  color: $tough;
+}
+
+.Weird {
+  color: $weird;
+}
+
+ul.no-bullets {
+  list-style-type: none;
+  // padding: 0;
+  // margin: 0;
+}
 .selected {
   color: crimson;
+}
+
+.small-pad {
+  padding-right: 10px;
 }
 
 .grid-column-2 {
@@ -24,7 +53,7 @@ $weird: #436436;
 }
 
 .grid-column-3 {
-  text-align: center;
+  text-align: left;
   display: grid;
   grid-template-columns: auto auto auto;
   padding-top: 1%;
