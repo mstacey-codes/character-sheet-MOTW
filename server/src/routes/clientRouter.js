@@ -8,6 +8,8 @@ const clientRoutes = [
   "/user-sessions/new",
   "/users/new",
   "/profile",
+  "/character-sheet",
+  "/character-sheet/:charId",
   "/new-character",
   "/new-character/:charId/:hunterIndex",
   "/new-character/:charId/flake",

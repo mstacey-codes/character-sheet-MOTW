@@ -1,3 +1,5 @@
+import CharacterClassTraitsSerializer from "./CharacterClassTraitsSerializer.js";
+
 class CharacterSerializer {
   static async getDetails(character) {
     const allowedAttributes = ["id", "name", "hunterIndex"];
@@ -5,16 +7,30 @@ class CharacterSerializer {
     for (const attribute of allowedAttributes) {
       serializedCharacter[attribute] = character[attribute];
     }
+    const formattedHunter = await character.$relatedQuery("hunter");
+    serializedCharacter.hunterType = formattedHunter.name;
     const allowedLookAttributes = ["aura", "body", "clothes", "eyes", "face"];
     serializedCharacter.look = {};
     for (const attribute of allowedLookAttributes) {
       serializedCharacter.look[attribute] = character[attribute];
     }
-    const allowedStatsAttributes = ["charm", "cool", "sharp", "tough", "weird"];
+    const allowedStatsAttributes = [
+      "charm",
+      "cool",
+      "sharp",
+      "tough",
+      "weird",
+      "luck",
+      "harm",
+      "experience",
+    ];
     serializedCharacter.stats = {};
     for (const attribute of allowedStatsAttributes) {
       serializedCharacter.stats[attribute] = character[attribute];
     }
+    const classTraits = await CharacterClassTraitsSerializer.getDetails(character);
+    serializedCharacter.classTraits = classTraits;
+
     return serializedCharacter;
   }
 }
