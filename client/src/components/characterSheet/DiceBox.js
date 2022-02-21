@@ -9,7 +9,6 @@ import {
   faDiceFive,
   faDiceSix,
 } from "@fortawesome/free-solid-svg-icons";
-import { lowerCase } from "lodash";
 
 const DiceBox = (props) => {
   const rollDice = () => {
