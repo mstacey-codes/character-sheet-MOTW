@@ -33,11 +33,16 @@ class Character extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name", "hunterIndex"],
+      required: ["name", "hunterIndex", "charm", "cool", "sharp", "tough", "weird"],
       properties: {
         name: { type: "string" },
         hunterIndex: { type: "string" },
         userId: { type: ["string", "integer"] },
+        charm: { type: ["string", "integer"], minimum: -2, maximum: 3 },
+        cool: { type: ["string", "integer"], minimum: -2, maximum: 3 },
+        sharp: { type: ["string", "integer"], minimum: -2, maximum: 3 },
+        tough: { type: ["string", "integer"], minimum: -2, maximum: 3 },
+        weird: { type: ["string", "integer"], minimum: -2, maximum: 3 },
       },
     };
   }
