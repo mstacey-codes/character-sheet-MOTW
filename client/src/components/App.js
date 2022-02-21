@@ -13,8 +13,10 @@ import getCurrentUser from "../services/getCurrentUser";
 
 import HomePage from "./HomePage";
 import UserProfile from "./UserProfile";
-import CharacterCreationForm from "./CharacterCreationForm";
-import AddCharacterInfoForm from "./AddCharacterInfoForm";
+import CharacterCreationForm from "./forms/CharacterCreationForm";
+import AddCharacterInfoForm from "./forms/AddCharacterInfoForm";
+
+import flakeInfoForm from "./forms/classSpecificForms/flakeInfoForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -48,9 +50,10 @@ const App = (props) => {
           component={CharacterCreationForm}
           user={currentUser}
         />
-        <Route exact path="/new-character/:charId/:hunterIndex">
-          <AddCharacterInfoForm user={currentUser} />
-        </Route>
+        <Route exact path="/new-character/:charId/chosen" />
+        <Route exact path="/new-character/:charId/flake" component={flakeInfoForm} />
+        {/* <AddCharacterInfoForm user={currentUser} /> */}
+        <Route exact path="/new-character/:charId/flake" />
       </Switch>
     </Router>
   );

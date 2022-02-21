@@ -2,9 +2,14 @@ import React from "react";
 import LookTile from "./LookTile.js";
 
 const LookForm = (props) => {
+  const [auraState, bodyState, clothesState, eyesState, faceState] = props.lookState;
   let aura;
   if (props.look.aura) {
     const auraOptions = props.look.aura.map((aura, index) => {
+      let isChecked = false;
+      if (aura === auraState) {
+        isChecked = true;
+      }
       return (
         <LookTile
           key={index + "aura"}
@@ -12,15 +17,24 @@ const LookForm = (props) => {
           name="aura"
           look={aura}
           handleInputChangeLook={props.handleInputChangeLook}
+          checked={isChecked}
         />
       );
     });
-    aura = <div>Their aura: {auraOptions}</div>;
+    aura = (
+      <div>
+        <strong>Their aura:</strong> {auraOptions}
+      </div>
+    );
   }
 
   let body;
   if (props.look.body) {
     const bodyOptions = props.look.body.map((body, index) => {
+      // let isChecked = "unchecked";
+      // if (body === bodyState) {
+      //   isChecked = "checked";
+      // }
       return (
         <LookTile
           key={index + "body"}
@@ -28,10 +42,15 @@ const LookForm = (props) => {
           name="body"
           look={body}
           handleInputChangeLook={props.handleInputChangeLook}
+          checked={body === bodyState}
         />
       );
     });
-    body = <div>Their body: {bodyOptions}</div>;
+    body = (
+      <div>
+        <strong>Their body:</strong> {bodyOptions}
+      </div>
+    );
   }
 
   let clothes;
@@ -47,7 +66,11 @@ const LookForm = (props) => {
         />
       );
     });
-    clothes = <div>Their clothes: {clothesOptions}</div>;
+    clothes = (
+      <div>
+        <strong>Their clothes</strong>: {clothesOptions}
+      </div>
+    );
   }
 
   let eyes;
@@ -63,7 +86,11 @@ const LookForm = (props) => {
         />
       );
     });
-    eyes = <div>Their eyes: {eyesOptions}</div>;
+    eyes = (
+      <div>
+        <strong>Their eyes</strong>: {eyesOptions}
+      </div>
+    );
   }
 
   let face;
@@ -79,17 +106,23 @@ const LookForm = (props) => {
         />
       );
     });
-    face = <div>Their face: {faceOptions}</div>;
+    face = (
+      <div>
+        <strong>Their face</strong>: {faceOptions}
+      </div>
+    );
   }
 
   return (
     <>
       When someone looks at your character, what do they notice?
-      {aura}
-      {body}
-      {clothes}
-      {eyes}
-      {face}
+      <div className="grid-column-3">
+        {aura}
+        {body}
+        {clothes}
+        {eyes}
+        {face}
+      </div>
     </>
   );
 };

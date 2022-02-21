@@ -9,7 +9,7 @@ class HunterSeeder {
         description:
           "A once-ordinary person who discovered a special destiny, and has been given the power to accomplish it. The Chosen is good in a fight, with some weird powers.",
         flavor:
-          "Your birth was prophesied. You are the Chosen One, and with your abilities you can save the world. If you fail, all will be destroyed. It all rests on you. Only you.",
+          "My birth was prophesied. If I fail, all will be destroyed. It all rests on me. Only me.",
       },
       {
         name: "The Crooked",

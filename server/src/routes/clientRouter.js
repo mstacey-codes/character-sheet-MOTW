@@ -10,7 +10,7 @@ const clientRoutes = [
   "/profile",
   "/new-character",
   "/new-character/:charId/:hunterIndex",
-  "/bananas/:test",
+  "/new-character/:charId/flake",
 ];
 router.get(clientRoutes, (req, res) => {
   res.sendFile(getClientIndexPath());

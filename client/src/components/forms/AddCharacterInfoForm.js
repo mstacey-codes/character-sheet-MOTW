@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import ErrorList from "./layout/ErrorList";
-import translateServerErrors from "../services/translateServerErrors";
+import ErrorList from "../layout/ErrorList";
+import translateServerErrors from "../../services/translateServerErrors";
 
 import RatingForm from "./RatingForm";
 import LookForm from "./LookForm";
@@ -17,29 +17,29 @@ const AddCharacterInfoForm = ({ hunterIndex, name }) => {
   //   name: "",
   // });
 
-  // const getCharacter = async () => {
-  //   try {
-  //     const response = await fetch(`/api/v1/characters/${characterId}`);
-  //     if (!response.ok) {
-  //       const errorMessage = `${response.status} (${response.statusText})`;
-  //       const error = new Error(errorMessage);
-  //       throw error;
-  //     }
-  //     const body = await response.json();
-  //     setCharacterData({
-  //       ...characterData,
-  //       name: body.character.name,
-  //       hunterIndex: body.character.hunterIndex,
-  //     });
-  //     return body.character.hunterIndex;
-  //   } catch (error) {
-  //     console.error(`Error in fetch: ${error.message}`);
-  //   }
-  // };
+  const getCharacter = async () => {
+    try {
+      const response = await fetch(`/api/v1/characters/${characterId}`);
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`;
+        const error = new Error(errorMessage);
+        throw error;
+      }
+      const body = await response.json();
+      setCharacterData({
+        ...characterData,
+        name: body.character.name,
+        hunterIndex: body.character.hunterIndex,
+      });
+      return body.character.hunterIndex;
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`);
+    }
+  };
 
-  // useEffect(() => {
-  //   getCharacter();
-  // }, []);
+  useEffect(() => {
+    getCharacter();
+  }, []);
 
   const getFormOptions = async (thisHunterIndex) => {
     try {
@@ -80,8 +80,8 @@ const AddCharacterInfoForm = ({ hunterIndex, name }) => {
   };
 
   useEffect(() => {
-    getFormOptions(hunterIndex);
-  }, [hunterIndex]);
+    getFormOptions(characterData.hunterIndex);
+  }, [characterData.hunterIndex]);
   // if (currentHunterIndex === "") {
   //   return null;
   // }

@@ -8,8 +8,6 @@ class Character extends Model {
   static get relationMappings() {
     const User = require("./User.js");
     const Hunter = require("./Hunter.js");
-    const Stats = require("./Stats.js");
-    const Look = require("./Look.js");
 
     return {
       user: {
@@ -29,35 +27,22 @@ class Character extends Model {
           to: "hunters.index",
         },
       },
-
-      stats: {
-        relation: Model.HasOneRelation,
-        modelClass: Stats,
-        join: {
-          from: "characters.id",
-          to: "stats.characterId",
-        },
-      },
-
-      look: {
-        relation: Model.HasOneRelation,
-        modelClass: Look,
-        join: {
-          from: "characters.id",
-          to: "looks.characterId",
-        },
-      },
     };
   }
 
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name", "hunterIndex"],
+      required: ["name", "hunterIndex", "charm", "cool", "sharp", "tough", "weird"],
       properties: {
         name: { type: "string" },
         hunterIndex: { type: "string" },
         userId: { type: ["string", "integer"] },
+        charm: { type: ["string", "integer"], minimum: -2, maximum: 3 },
+        cool: { type: ["string", "integer"], minimum: -2, maximum: 3 },
+        sharp: { type: ["string", "integer"], minimum: -2, maximum: 3 },
+        tough: { type: ["string", "integer"], minimum: -2, maximum: 3 },
+        weird: { type: ["string", "integer"], minimum: -2, maximum: 3 },
       },
     };
   }
