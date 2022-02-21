@@ -38,10 +38,15 @@ const UserProfile = ({ user }) => {
   }
 
   return (
-    <div>
-      <h1>Welcome {user.email}</h1>
-      {allUserCharacters}
-    </div>
+    <>
+      <div>
+        <h1>Welcome {user.email}</h1>
+        {allUserCharacters}
+      </div>
+      <div>
+        <Link to="/new-character">Create a New Character</Link>
+      </div>
+    </>
   );
 };
 

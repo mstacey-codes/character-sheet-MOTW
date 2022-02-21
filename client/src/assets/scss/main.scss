@@ -8,6 +8,40 @@ $sharp: #3891a6;
 $tough: #cc2936;
 $weird: #436436;
 // place global css here
+
+.selected {
+  color: crimson;
+}
+
+.grid-column-2 {
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto auto;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  column-gap: 100px;
+  row-gap: 10px;
+}
+
+.grid-column-3 {
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  column-gap: 50px;
+  row-gap: 10px;
+}
+
+.grid-column-4 {
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  column-gap: 10px;
+  row-gap: 10px;
+}
 *,
 *::before,
 *::after {
