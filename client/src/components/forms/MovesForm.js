@@ -2,9 +2,7 @@ import React from "react";
 
 import MoveTile from "./MoveTile";
 
-const MovesForm = ({ moves, handleInputChangeMoves }) => {
-  console.log(moves);
-
+const MovesForm = ({ moves, movesData, handleInputChangeMoves, hunterIndex }) => {
   const requiredMovesList = moves.required_moves.map((move) => {
     return (
       <>
@@ -15,29 +13,26 @@ const MovesForm = ({ moves, handleInputChangeMoves }) => {
   });
 
   const optionalMovesList = moves.optional_moves.map((move) => {
-    const moveClickHandlerWrapper = () => {
-      let newMoves = [...movesData];
-      if (newMoves.includes(moves.name)) {
-        let moveIndex = newMoves.indexOf(move.name);
-        newMoves.splice(moveIndex, 1);
-        return setMovesData(newMoves);
-      } else {
-      }
-      return setMovesData([...movesData, moves.name]);
-    };
+    const formattedMoveName = move.name.replace(/\W/g, "");
+    const moveId = hunterIndex + formattedMoveName;
+
     return (
       <MoveTile
-        key={move.name}
-        id={move.name}
+        key={moveId}
+        id={moveId}
         name={move.name}
+        value={moveId}
         description={move.description}
         handleInputChangeMoves={handleInputChangeMoves}
+        checked={movesData.includes(moveId)}
       />
     );
   });
+
   return (
     <>
-      <h2>Choose your moves</h2>
+      <br />
+      <h4>Choose your moves</h4>
       <div>
         This hunter type has {moves.required_move_slots} required moves.
         <div>{requiredMovesList}</div>

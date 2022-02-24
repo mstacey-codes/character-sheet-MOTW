@@ -39,12 +39,21 @@ const UserProfile = ({ user }) => {
 
   return (
     <>
-      <div>
-        <h1>Welcome {user.email}</h1>
-        {allUserCharacters}
-      </div>
-      <div>
-        <Link to="/new-character">Create a New Character</Link>
+      <div className="basic-margins">
+        <div className="clean-box">
+          <div className="clean-box">
+            <h1>Welcome {user.email}</h1>
+            <div className="grid-column-4">{allUserCharacters}</div>
+
+            <br />
+            <br />
+            <div>
+              <Link to="/new-character">
+                <h2 className="flavor">Create a New Character</h2>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

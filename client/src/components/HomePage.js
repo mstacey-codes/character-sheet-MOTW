@@ -20,8 +20,17 @@ const HomePage = ({ user }) => {
 
   return (
     <>
-      <h1>There are monsters in the world... and some people want to do something about it.</h1>
-      {message}
+      <div className="basic-margins center">
+        <div className="clean-box">
+          <div className="clean-box">
+            <h2>Welcome to the...</h2>
+            <h1> Monster of the Week Interactive Character Sheet</h1>
+            <h2>There are monsters in the world...</h2>{" "}
+            <h2> and some people want to do something about it.</h2>
+            {message}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

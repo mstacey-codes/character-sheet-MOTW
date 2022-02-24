@@ -11,7 +11,7 @@ const clientRoutes = [
   "/character-sheet",
   "/character-sheet/:charId",
   "/new-character",
-  "/new-character/:charId/:hunterIndex",
+  "/new-character/:charId/",
   "/new-character/:charId/flake",
 ];
 router.get(clientRoutes, (req, res) => {

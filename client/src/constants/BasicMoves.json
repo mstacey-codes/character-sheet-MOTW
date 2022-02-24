@@ -1,0 +1,121 @@
+{
+  "basic_moves": [
+    {
+      "id": 1,
+      "stat": "charm",
+      "name": "Manipulate Someone",
+      "functionName": "manipulate",
+      "failed": "Move failed. Mark experience and listen to your Keeper.",
+      "partial": "A normal person will do it, but only if you something for them right now to show that you mean it. If you asked too  much, they'll tell you what, if anything, it would take for them to do it. \n \n If you rolled to manipulate another hunter, they mark experience if they do what you ask.",
+      "success": "Success! \n \nA normal person will do what you want for the reason you gave them. If you asked too much, they'll tell you the minimum it would take for them to do it (or if there's no way they'd do it). \n \n If you rolled to manipulate another hunter, if they do what you ask they mark experience and get +1 forward."
+    },
+    {
+      "id": 2,
+      "stat": "cool",
+      "name": "Act Under Pressure",
+      "functionName": "act",
+      "failed": "Move failed. Mark experience and listen to your Keeper.",
+      "partial": "The Keeper is going to give you a worse outcome, hard choice, or a price to pay.",
+      "success": "Success! You do what you set out to do!"
+    },
+    {
+      "id": 3,
+      "stat": "cool",
+      "name": "Help Out",
+      "functionName": "help",
+      "failed": "Move failed. Mark experience and listen to your Keeper.",
+      "partial": "Your help grants the other hunter +1 to their roll, but you also expose yourself to trouble or danger.",
+      "success": "Success! Your help grants the other hunter +1 to their roll."
+    },
+    {
+      "id": 4,
+      "stat": "sharp",
+      "name": "Investigate a Mystery",
+      "functionName": "investigate",
+      "failed": "Move failed. Mark experience and listen to your Keeper.",
+      "partial": "Ask the Keeper one of the following questions:\n \n+ What happened here?\n \n+ What sort of creature is it?\n \n+ What can it do?\n \n+ What can hurt it?\n \n+ Where did it go?\n \n+ What was it going to do?\n \n+ What is being concealed here?",
+      "success": "Ask the Keeper two of the following questions:\n \n+ What happened here?\n \n+ What sort of creature is it?\n \n+ What can it do?\n \n+ What can hurt it?\n \n+ Where did it go?\n \n+ What was it going to do?\n \n+ What is being concealed here?"
+    },
+    {
+      "id": 5,
+      "stat": "sharp",
+      "name": "Read a Bad Situation",
+      "functionName": "read",
+      "failed": "Move failed. Mark experience and listen to your Keeper.",
+      "partial": "You can ask the Keeper one of the following questions: + What's my best way in? + What's my best way out? Are there dangers we haven't noticed? + What's the biggest threat? + What's most vulnerable to me? + What's the best way to protect the victims. ",
+      "success": "Success! You can ask the Keeper three of the following questions: + What's my best way in? + What's my best way out? Are there dangers we haven't noticed? + What's the biggest threat? + What's most vulnerable to me? + What's the best way to protect the victims. "
+    },
+    {
+      "id": 6,
+      "stat": "tough",
+      "name": "Kick Some Ass",
+      "functionName": "kick",
+      "failed": "Move failed. Mark experience and listen to your Keeper.",
+      "partial": "You harm on each other. The amount of harm is based on the established dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.",
+      "success": "Choose one extra effect for your weapon:\n+ You gain the advantage: take +1 forward, or give +1 forward to another hunter. \n + You inflict terrible harm (+1 harm).\n+ You suffer less harm (-1 harm).\n+ You force them where you want them."
+    },
+    {
+      "id": 7,
+      "stat": "tough",
+      "name": "Protect Someone",
+      "functionName": "protect",
+      "failed": "Move failed. Mark experience and listen to your Keeper.",
+      "partial": "You protect them okay, but you'll suffer some or all of the harm they were going to get.",
+      "success": "Success! You can choose one of the following effects: + You suffer little harm (-1 harm). + All impending danger is now focused on you. + You inflict harm on the enemy. + You hold the enemy back."
+    },
+    {
+      "id": 8,
+      "stat": "weird",
+      "name": "Use Magic",
+      "functionName": "use",
+      "failed": "Move failed. Mark experience and listen to your Keeper.",
+      "partial": "The magic worked imperfectly; choose your effect and a glitch. ",
+      "success": "Success! Choose some the effect it has."
+    },
+    {
+      "id": 9,
+      "stat": "charm",
+      "name": "Roll +Charm",
+      "functionName": "charm",
+      "failed": "You failed. Mark experience. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "partial": "You had a partial success. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "success": "Success! Ask your Keeper what comes next or refer to the move that you rolled for."
+    },
+    {
+      "id": 10,
+      "stat": "cool",
+      "name": "Roll +Cool",
+      "functionName": "cool",
+      "failed": "You failed. Mark experience. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "partial": "You had a partial success. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "success": "Success! Ask your Keeper what comes next or refer to the move that you rolled for."
+    },
+    {
+      "id": 11,
+      "stat": "sharp",
+      "name": "Roll +Sharp",
+      "functionName": "sharp",
+      "failed": "You failed. Mark experience. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "partial": "You had a partial success. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "success": "Success! Ask your Keeper what comes next or refer to the move that you rolled for."
+    },
+    {
+      "id": 12,
+      "stat": "tough",
+      "name": "Roll +Tough",
+      "functionName": "tough",
+      "failed": "You failed. Mark experience. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "partial": "You had a partial success. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "success": "Success! Ask your Keeper what comes next or refer to the move that you rolled for."
+    },
+    {
+      "id": 13,
+      "stat": "weird",
+      "name": "Roll +Weird",
+      "functionName": "Weird",
+      "failed": "You failed. Mark experience. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "partial": "You had a partial success. Ask your Keeper what comes next or refer to the move that you rolled for.",
+      "success": "Success! Ask your Keeper what comes next or refer to the move that you rolled for."
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import objection from "objection";
 import { Character } from "../../../models/index.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import CharacterSerializer from "../../serializers/CharacterSerializer.js";
-// import characterInfoRouter from "./characterInfoRouter.js";
+import characterMovesRouter from "./characterMovesRouter.js";
 
 const { ValidationError } = objection;
 
@@ -59,16 +59,6 @@ charactersRouter.get("/:charId", async (req, res) => {
   }
 });
 
-// charactersRouter.get("/:charId/info", async (req, res) => {
-//   const characterIndex = req.params.charId;
-//   try {
-//     const character = await Character.query().findById(characterIndex);
-//     return res.status(200).json({ character });
-//   } catch (error) {
-//     return res.status(500).json({ errors: error });
-//   }
-// });
-
-// charactersRouter.use("/:charId/info", characterInfoRouter);
+charactersRouter.use("/:charId/moves", characterMovesRouter);
 
 export default charactersRouter;

@@ -6,7 +6,6 @@ import {
   faBrain,
   faDumbbell,
   faCrow,
-  faClover,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,31 +15,31 @@ const StatsTile = ({ stats }) => {
   console.log(stats);
   const setStatsModifiers = [
     {
-      iconClass: "fa-solid fa-star small-pad",
+      iconClass: "fa-solid fa-star fa-xl small-pad",
       icon: faStar,
       statName: "Charm",
       modifier: stats.charm,
     },
     {
-      iconClass: "fa-solid fa-hand-peace small-pad",
+      iconClass: "fa-solid fa-hand-peace fa-xl small-pad",
       icon: faHandPeace,
       statName: "Cool",
       modifier: stats.cool,
     },
     {
-      iconClass: "fa-solid fa-brain small-pad",
+      iconClass: "fa-solid fa-brain fa-xl small-pad",
       icon: faBrain,
       statName: "Sharp",
       modifier: stats.sharp,
     },
     {
-      iconClass: "fa-solid fa-dumbbell small-pad",
+      iconClass: "fa-solid fa-dumbbell fa-xl small-pad",
       icon: faDumbbell,
       statName: "Tough",
       modifier: stats.tough,
     },
     {
-      iconClass: "fa-solid fa-crow small-pad",
+      iconClass: "fa-solid fa-crow fa-xl small-pad",
       icon: faCrow,
       statName: "Weird",
       modifier: stats.weird,
@@ -69,17 +68,27 @@ const StatsTile = ({ stats }) => {
   return (
     <>
       <div>
-        <div className="grid-column-3">
+        <div>
           <ul className="no-bullets">{characterModifiers}</ul>
         </div>
         <ul className="no-bullets">
           <li>
             {/* <FontAwesomeIcon className="fa-solid fa-clover" icon={faClover} /> */}
-            Luck: {stats.luck}/7
+            <h5>
+              <strong>Luck: {stats.luck}/7</strong>
+            </h5>
           </li>
           {/* <FontAwesomeIcon className={harmIconClassName} icon={harmIcon} />{" "} */}
-          <li>Harm: {stats.harm}/7</li>
-          <li>Experience: {stats.experience % 5}</li>
+          <li>
+            <h5>
+              <strong>Harm: {stats.harm}/7</strong>
+            </h5>
+          </li>
+          <li>
+            <h5>
+              <strong>Experience: {stats.experience % 5}</strong>
+            </h5>
+          </li>
         </ul>
       </div>
     </>

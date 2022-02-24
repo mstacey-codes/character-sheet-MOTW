@@ -9,15 +9,16 @@ const RatingForm = (props) => {
         id={index + "rating"}
         rating={rating}
         handleInputChangeRating={props.handleInputChangeRating}
+        isChecked={JSON.stringify(rating) === JSON.stringify(props.ratingState)}
       />
     );
   });
 
   return (
-    <>
-      What stats best fit your character?
-      <ul>{ratingTiles}</ul>
-    </>
+    <div className="ratings-block">
+      <h5>What stats best fit your character?</h5>
+      <ul className="no-bullets">{ratingTiles}</ul>
+    </div>
   );
 };
 
