@@ -28,6 +28,7 @@ class CharacterSerializer {
     for (const attribute of allowedStatsAttributes) {
       serializedCharacter.stats[attribute] = character[attribute];
     }
+    serializedCharacter.moves = await character.$relatedQuery("moves");
     const classTraits = await CharacterClassTraitsSerializer.getDetails(character);
     serializedCharacter.classTraits = classTraits;
 

@@ -3,11 +3,9 @@ import { Redirect } from "react-router-dom";
 import ErrorList from "../layout/ErrorList";
 import translateServerErrors from "../../services/translateServerErrors";
 
-// import AddCharacterInfoForm from "./AddCharacterInfoForm.js";
 import LookForm from "./LookForm";
 import RatingForm from "./RatingForm";
 import ClassTile from "./ClassTile";
-import MovesForm from "./MovesForm";
 
 const CharacterCreationForm = ({ user }) => {
   if (!user) {
@@ -17,7 +15,6 @@ const CharacterCreationForm = ({ user }) => {
   const [redirect, setRedirect] = useState({
     shouldRedirect: false,
     charId: "",
-    hunter: "",
   });
 
   const [hunterData, setHunterData] = useState([]);
@@ -40,8 +37,6 @@ const CharacterCreationForm = ({ user }) => {
     face: "",
     rating: {},
   });
-
-  const [moves, setMoves] = useState([]);
 
   const getHunters = async () => {
     try {
@@ -71,11 +66,9 @@ const CharacterCreationForm = ({ user }) => {
   const allClasses = hunterData.map((hunter) => {
     let selected = "";
     if (characterData.hunterIndex === hunter.index) {
-      console.log(true);
       selected = "selected";
     }
     const hunterIndexClickHandler = (event) => {
-      console.log(event.currentTarget.value);
       setCharacterData({
         ...characterData,
         hunterIndex: hunter.index,
@@ -100,11 +93,6 @@ const CharacterCreationForm = ({ user }) => {
     );
   });
 
-  // const [formOptions, setFormOptions] = useState({
-  //   look: null,
-  //   ratings: null,
-  // });
-
   const getFormOptions = async (thisHunterIndex) => {
     try {
       const response = await fetch(`/api/v1/hunters/${thisHunterIndex}`);
@@ -118,15 +106,7 @@ const CharacterCreationForm = ({ user }) => {
         ...formOptions,
         look: body.look,
         ratings: body.ratings,
-        //  moves: body.moves
       });
-      // if (body.moves.required_move_slots > 0) {
-      //   const requiredMoves = body.moves.required_moves.reduce((accumulator, current) => {
-      //     accumulator.push(current.name);
-      //     return accumulator;
-      //   }, []);
-      //   setMoves(requiredMoves);
-      // }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
@@ -135,7 +115,7 @@ const CharacterCreationForm = ({ user }) => {
   useEffect(() => {
     getFormOptions(characterData.hunterIndex);
   }, [characterData.hunterIndex]);
-  ///
+
   if (characterData.hunterIndex === "") {
     return null;
   }
@@ -153,10 +133,6 @@ const CharacterCreationForm = ({ user }) => {
       ...characterData,
       [event.currentTarget.name]: JSON.parse(event.currentTarget.value),
     });
-  };
-
-  const handleInputChangeMoves = (event) => {
-    setMovesData([...movesData, event.currentTarget.name]);
   };
 
   if (!formOptions.look || !formOptions.ratings) {
@@ -189,7 +165,6 @@ const CharacterCreationForm = ({ user }) => {
           ...redirect,
           shouldRedirect: true,
           charId: body.character.id,
-          hunter: body.character.hunterIndex,
         });
       }
     } catch (error) {
@@ -203,63 +178,67 @@ const CharacterCreationForm = ({ user }) => {
   };
 
   if (redirect.shouldRedirect) {
-    return <Redirect push to={`/new-character/${redirect.charId}/${redirect.hunter}`} />;
+    return <Redirect push to={`/new-character/${redirect.charId}`} />;
   }
 
   return (
     <>
-      <ErrorList errors={errors} />
-      <form onSubmit={handleSubmit}>
-        <h3>Create a new character: </h3>
-        <label>
-          What is your character's name?
-          <input
-            type="text"
-            id="name"
-            name="name"
-            onChange={handleInputChange}
-            value={characterData.name}
-          />
-        </label>
-        Choose one of the following
-        <div className="grid-column-4">{allClasses}</div>
-        <div className="grid-column-2">
-          <div>
-            <strong>Someone might introduce the {chosenHunter.name} as...</strong>
-            <h6>{chosenHunter.description}</h6>
+      <div className="clean-box">
+        <form onSubmit={handleSubmit}>
+          <h1>Create a new character: </h1>
+          <div className="clean-box">
+            <h4>What is your character's name?</h4>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              onChange={handleInputChange}
+              value={characterData.name}
+              className="small-input"
+            />
+          </div>
+          <div className="clean-box">
+            <h4>Choose one of the following</h4>
+            <div className="grid-column-4">{allClasses}</div>
+            <div className="grid-column-2">
+              <div>
+                <strong>Someone might introduce the {chosenHunter.name} as...</strong>
+                <h6>{chosenHunter.description}</h6>
+              </div>
+              <div>
+                <strong>{chosenHunter.name} might say ...</strong>
+                <h6>{chosenHunter.flavor}</h6>
+              </div>
+            </div>
+          </div>
+          <h1>Fill out more information about your character:</h1>
+          <div className="clean-box">
+            <LookForm
+              look={formOptions.look}
+              handleInputChangeLook={handleInputChange}
+              lookState={[
+                characterData.aura,
+                characterData.body,
+                characterData.clothes,
+                characterData.eyes,
+                characterData.face,
+              ]}
+            />
+          </div>
+          <br />
+          <div className="clean-box">
+            <RatingForm
+              ratings={formOptions.ratings}
+              ratingState={characterData.rating}
+              handleInputChangeRating={handleInputChangeRating}
+            />
           </div>
           <div>
-            <strong>{chosenHunter.name} might say ...</strong>
-            <h6>{chosenHunter.flavor}</h6>
+            <ErrorList errors={errors} />
+            <input className="button center" type="submit" value={`Create ${characterData.name}`} />
           </div>
-        </div>
-        <h1>Fill out more information about your character:</h1>
-        <div>
-          <LookForm
-            look={formOptions.look}
-            handleInputChangeLook={handleInputChange}
-            lookState={[
-              characterData.aura,
-              characterData.body,
-              characterData.clothes,
-              characterData.eyes,
-              characterData.face,
-            ]}
-          />
-        </div>
-        <div>
-          <RatingForm
-            ratings={formOptions.ratings}
-            handleInputChangeRating={handleInputChangeRating}
-          />
-        </div>
-        {/* <div>
-          <MovesForm moves={formOptions.moves} handleInputChangeMoves={handleInputChangeMoves} />
-        </div> */}
-        <div>
-          <input type="submit" value="Submit" />
-        </div>
-      </form>
+        </form>
+      </div>
     </>
   );
 };

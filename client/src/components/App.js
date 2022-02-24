@@ -15,9 +15,8 @@ import HomePage from "./HomePage";
 import CharacterSheet from "./characterSheet/CharacterSheet";
 import UserProfile from "./UserProfile";
 import CharacterCreationForm from "./forms/CharacterCreationForm";
-import AddCharacterInfoForm from "./forms/AddCharacterInfoForm";
 
-import flakeInfoForm from "./forms/classSpecificForms/flakeInfoForm";
+import SecondaryInfoForm from "./forms/SecondaryInfoForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -45,7 +44,6 @@ const App = (props) => {
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/please-login" component={PleaseLogin} />
         <AuthenticatedRoute exact path="/profile" component={UserProfile} user={currentUser} />
-        {/* <Route exact path="/character-sheet" component={CharacterSheet} /> */}
         <Route exact path="/character-sheet/:charId" component={CharacterSheet} />
         <AuthenticatedRoute
           exact
@@ -53,11 +51,19 @@ const App = (props) => {
           component={CharacterCreationForm}
           user={currentUser}
         />
-        <Route exact path="/new-character/:charId/chosen" />
-        <Route exact path="/new-character/:charId/flake" component={flakeInfoForm} />
-        {/* <AddCharacterInfoForm user={currentUser} /> */}
-        <Route exact path="/new-character/:charId/flake" />
+        <Route exact path="/new-character/:charId" component={SecondaryInfoForm} />
       </Switch>
+
+      <div className="footer-wrapper">
+        <footer className="center">
+          <strong>Monster of the Week</strong> is copyrighted by Evil Hat Productions, LLC and
+          Generic Games. Special thanks to the{" "}
+          <a href="https://motwapi.com/" target="_blank">
+            Monster of the Week API
+          </a>
+          !
+        </footer>
+      </div>
     </Router>
   );
 };

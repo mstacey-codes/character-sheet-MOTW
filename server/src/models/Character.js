@@ -8,6 +8,8 @@ class Character extends Model {
   static get relationMappings() {
     const User = require("./User.js");
     const Hunter = require("./Hunter.js");
+    const Ability = require("./Ability.js");
+    const Move = require("./Move.js");
     const DivineTraits = require("./classSpecificModels/DivineTraits.js");
 
     return {
@@ -26,6 +28,25 @@ class Character extends Model {
         join: {
           from: "characters.hunterIndex",
           to: "hunters.index",
+        },
+      },
+
+      abilities: {
+        relation: Model.HasManyRelation,
+        modelClass: Ability,
+        join: {
+          from: "characters.id",
+          to: "abilities.characterId",
+        },
+      },
+
+      moves: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Move,
+        join: {
+          from: "characters.id",
+          through: { from: "abilities.characterId", to: "abilities.moveIndex" },
+          to: "moves.index",
         },
       },
 

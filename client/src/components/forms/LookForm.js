@@ -6,10 +6,6 @@ const LookForm = (props) => {
   let aura;
   if (props.look.aura) {
     const auraOptions = props.look.aura.map((aura, index) => {
-      let isChecked = false;
-      if (aura === auraState) {
-        isChecked = true;
-      }
       return (
         <LookTile
           key={index + "aura"}
@@ -17,7 +13,7 @@ const LookForm = (props) => {
           name="aura"
           look={aura}
           handleInputChangeLook={props.handleInputChangeLook}
-          checked={isChecked}
+          checked={aura === auraState}
         />
       );
     });
@@ -31,10 +27,6 @@ const LookForm = (props) => {
   let body;
   if (props.look.body) {
     const bodyOptions = props.look.body.map((body, index) => {
-      // let isChecked = "unchecked";
-      // if (body === bodyState) {
-      //   isChecked = "checked";
-      // }
       return (
         <LookTile
           key={index + "body"}
@@ -42,7 +34,7 @@ const LookForm = (props) => {
           name="body"
           look={body}
           handleInputChangeLook={props.handleInputChangeLook}
-          checked={body === bodyState}
+          isChecked={body === bodyState}
         />
       );
     });
@@ -62,6 +54,7 @@ const LookForm = (props) => {
           id={index + "clothes"}
           name="clothes"
           look={clothes}
+          isChecked={clothes === clothesState}
           handleInputChangeLook={props.handleInputChangeLook}
         />
       );
@@ -82,6 +75,7 @@ const LookForm = (props) => {
           id={index + "eyes"}
           name="eyes"
           look={eyes}
+          isChecked={eyes === eyesState}
           handleInputChangeLook={props.handleInputChangeLook}
         />
       );
@@ -102,6 +96,7 @@ const LookForm = (props) => {
           id={index + "face"}
           name="face"
           look={face}
+          isChecked={face === faceState}
           handleInputChangeLook={props.handleInputChangeLook}
         />
       );
@@ -115,7 +110,7 @@ const LookForm = (props) => {
 
   return (
     <>
-      When someone looks at your character, what do they notice?
+      <h5>When someone looks at your character, what do they notice?</h5>
       <div className="grid-column-3">
         {aura}
         {body}
