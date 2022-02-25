@@ -44,7 +44,12 @@ const App = (props) => {
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/please-login" component={PleaseLogin} />
         <AuthenticatedRoute exact path="/profile" component={UserProfile} user={currentUser} />
-        <Route exact path="/character-sheet/:charId" component={CharacterSheet} />
+        <AuthenticatedRoute
+          exact
+          path="/character-sheet/:charId"
+          component={CharacterSheet}
+          user={currentUser}
+        />
         <AuthenticatedRoute
           exact
           path="/new-character"

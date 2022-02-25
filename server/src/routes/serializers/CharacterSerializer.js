@@ -2,7 +2,7 @@ import CharacterClassTraitsSerializer from "./CharacterClassTraitsSerializer.js"
 
 class CharacterSerializer {
   static async getDetails(character) {
-    const allowedAttributes = ["id", "name", "hunterIndex"];
+    const allowedAttributes = ["userId", "id", "name", "hunterIndex"];
     let serializedCharacter = {};
     for (const attribute of allowedAttributes) {
       serializedCharacter[attribute] = character[attribute];
