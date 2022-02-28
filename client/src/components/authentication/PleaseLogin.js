@@ -8,9 +8,9 @@ const PleaseLogin = (props) => {
         <h3 className="flavor">
           It's dangerous out there! We can't let you through unless you're a hunter.
         </h3>
-        <h3>
-          If you already have a hunter, please <Link to="/user-sessions/new">Sign In</Link>. If you
-          haven't created a hunter, you'd better <Link to="/users/new">Sign Up</Link>.
+        <h3 className="center">
+          If you already have a hunter, please <Link to="/user-sessions/new">Sign In</Link>. <br />
+          If you haven't created a hunter, you'd better <Link to="/users/new">Sign Up</Link>.
         </h3>
       </div>
     </div>

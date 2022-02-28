@@ -56,7 +56,7 @@ const CharacterSheet = (props) => {
   }
 
   let linkToMoveForm;
-  if (characterData.moves.length === 0) {
+  if (characterData.moves.length === 0 && characterData.userId === currentUser.id) {
     linkToMoveForm = <Link to={`/new-character/${characterId}`}>Fill out your moves</Link>;
   }
 
@@ -82,7 +82,6 @@ const CharacterSheet = (props) => {
               <div>
                 <h4 className="flavor">General Moves</h4>
                 {basicMoves}
-                {/* <BasicMoveList stats={characterData.stats} /> */}
               </div>
             </div>
             <div className="column">
@@ -91,14 +90,14 @@ const CharacterSheet = (props) => {
                 <MovesList moves={characterData.moves} />
                 {linkToMoveForm}
               </div>
-              <div>
+              {/* <div>
                 <h4>Gear</h4>
                 <br />
               </div>
               <div>
                 <h4>Extra Character Information</h4>
                 <br />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

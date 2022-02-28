@@ -12,7 +12,6 @@ import {
 import StatTile from "./StatTile";
 
 const StatsTile = ({ stats }) => {
-  console.log(stats);
   const setStatsModifiers = [
     {
       iconClass: "fa-solid fa-star fa-xl small-pad",
@@ -73,12 +72,10 @@ const StatsTile = ({ stats }) => {
         </div>
         <ul className="no-bullets">
           <li>
-            {/* <FontAwesomeIcon className="fa-solid fa-clover" icon={faClover} /> */}
             <h5>
               <strong>Luck: {stats.luck}/7</strong>
             </h5>
           </li>
-          {/* <FontAwesomeIcon className={harmIconClassName} icon={harmIcon} />{" "} */}
           <li>
             <h5>
               <strong>Harm: {stats.harm}/7</strong>

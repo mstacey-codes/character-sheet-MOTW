@@ -8,10 +8,12 @@ const MoveTile = ({ move, handleClick, selected }) => {
 
   return (
     <div class-name="basic-padding">
-      <p onClick={handleClick}>
-        <strong className={`${move.stat}`}>{move.name}</strong>
-      </p>
-      <p>{description}</p>
+      <label>
+        <p onClick={handleClick}>
+          <strong className={`${move.stat}`}>{move.name}</strong>
+        </p>
+        <p>{description}</p>
+      </label>
     </div>
   );
 };
