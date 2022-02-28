@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -58,7 +58,6 @@ const DiceBox = ({ result, clearResult }) => {
       classDie = "fa-solid fa-crow fa-3x small-pad";
       iconDie = faCrow;
     }
-    console.log("class", classDie, "icon", iconDie);
     return (
       <>
         <FontAwesomeIcon key={`die${index}`} className={`${classDie} ${die}`} icon={iconDie} />
@@ -77,7 +76,7 @@ const DiceBox = ({ result, clearResult }) => {
         <h6>{result.result}</h6>
       </div>
       <div>
-        <button type="button" onClick={clearResult}>
+        <button className="button" onClick={clearResult}>
           <strong>Clear</strong>
         </button>
       </div>

@@ -39,11 +39,16 @@ body {
   box-shadow: 5px 4px 8px 0px rgba(0, 0, 0, 0.47), 5px 4px 8px 0px rgba(0, 0, 0, 0.47);
 }
 
+.button {
+  background-color: #000000;
+}
+
 $charm: #6b128b;
 $cool: #ff9505;
 $sharp: #156999;
 $tough: #cc2936;
 $weird: #436436;
+
 .Charm {
   color: $charm;
 }
@@ -90,6 +95,10 @@ $weird: #436436;
   min-height: 100vh;
 }
 
+label {
+  cursor: pointer;
+}
+
 form {
   margin-left: 3%;
   margin-right: 3%;
@@ -122,6 +131,10 @@ ul.no-bullets {
 }
 .selected {
   color: crimson;
+}
+
+.select-move {
+  text-decoration: underline;
 }
 
 .small-pad {

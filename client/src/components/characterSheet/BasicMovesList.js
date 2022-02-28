@@ -4,7 +4,7 @@ import BasicMoveJSON from "../../constants/BasicMoves.json";
 import DiceBox from "./DiceBox";
 
 const BasicMoveList = ({ stats }) => {
-  // const [moveId, setMoveId] = useState(null);
+  const [hovering, setHover] = useState("");
   const [result, setResult] = useState(null);
 
   const rollDice = () => {
@@ -39,6 +39,19 @@ const BasicMoveList = ({ stats }) => {
   let allMoves;
   if (!result) {
     allMoves = BasicMoveJSON.basic_moves.map((move) => {
+      const mouseOverHandler = () => {
+        setHover(move.id);
+      };
+
+      const mouseOffHandler = () => {
+        setHover("");
+      };
+
+      let selectedMove = "";
+      if (hovering === move.id) {
+        selectedMove = `select-move ${move.stat}`;
+      }
+
       const movePickHandler = () => {
         setResult(basicMove(move.id));
       };
@@ -51,6 +64,9 @@ const BasicMoveList = ({ stats }) => {
           stat={move.stat}
           movePickHandler={movePickHandler}
           BasicMoveJSON={BasicMoveJSON}
+          mouseOverHandler={mouseOverHandler}
+          mouseOffHandler={mouseOffHandler}
+          selectedMove={selectedMove}
         />
       );
     });

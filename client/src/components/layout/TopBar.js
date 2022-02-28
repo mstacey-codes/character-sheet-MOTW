@@ -24,9 +24,9 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">App</li>
+          <li className="menu-text">Monster of the Week Interactive Character Sheet</li>
           <li>
-            <Link to="/profile">Character List</Link>
+            <Link to="/profile">My Character List</Link>
           </li>
         </ul>
       </div>
