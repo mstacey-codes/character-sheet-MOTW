@@ -5,7 +5,7 @@ import cleanUserInput from "../../../services/cleanUserInput.js";
 import CharacterSerializer from "../../serializers/CharacterSerializer.js";
 import characterMovesRouter from "./characterMovesRouter.js";
 
-const { ValidationError } = objection;
+const { ValidationError, raw } = objection;
 
 const charactersRouter = new express.Router();
 
@@ -51,6 +51,24 @@ charactersRouter.get("/:charId", async (req, res) => {
   const characterIndex = req.params.charId;
   try {
     const character = await Character.query().findById(characterIndex);
+    const serializedCharacter = await CharacterSerializer.getDetails(character);
+    return res.status(200).json({ character: serializedCharacter });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ errors: error });
+  }
+});
+
+charactersRouter.patch("/:charId", async (req, res) => {
+  console.log("in router");
+  const characterIndex = req.params.charId;
+  const replaceStat = req.body;
+  console.log(replaceStat);
+  try {
+    console.log("pause");
+    const character = await Character.query().findById(characterIndex);
+    await character.$query().patchAndFetch(replaceStat);
+    console.log("character: ", character);
     const serializedCharacter = await CharacterSerializer.getDetails(character);
     return res.status(200).json({ character: serializedCharacter });
   } catch (error) {

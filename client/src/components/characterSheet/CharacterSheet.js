@@ -4,6 +4,8 @@ import StatsList from "./StatsList.js";
 import MovesList from "./MovesList.js";
 import LookList from "./LookList.js";
 import BasicMoveList from "./BasicMovesList.js";
+import ButtonInformation from "../../constants/ButtonInformation.json";
+import StatChangeButton from "./StatButton.js";
 
 const CharacterSheet = (props) => {
   if (!props.user) {
@@ -60,6 +62,101 @@ const CharacterSheet = (props) => {
     linkToMoveForm = <Link to={`/new-character/${characterId}`}>Fill out your moves</Link>;
   }
 
+  // const incrementExperience = async (currentExperience, action) => {
+  //   // const action = "cool";
+  //   const newValue = currentExperience + 1;
+  //   console.log("my newValue is", newValue);
+  //   try {
+  //     const response = await fetch(`/api/v1/characters/${characterId}`, {
+  //       method: "PATCH",
+  //       headers: new Headers({
+  //         "Content-Type": "application/json",
+  //       }),
+  //       body: JSON.stringify({ experience: newValue }),
+  //     });
+  //     if (!response.ok) {
+  //       setErrors([]);
+  //     } else {
+  //       const body = await response.json();
+  //       console.log(body);
+  //       setCharacterData({ ...characterData, stats: body.character.stats });
+  //     }
+  //   } catch (error) {
+  //     console.error(`Error in fetch: ${error.message}`);
+  //   }
+  // };
+
+  const modifyStats = async (statType, currentStat, action) => {
+    let change;
+    if (action === "increment") {
+      change = 1;
+    } else {
+      change = -1;
+    }
+    const newValue = currentStat + change;
+    try {
+      const response = await fetch(`/api/v1/characters/${characterId}`, {
+        method: "PATCH",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify({ [statType]: newValue }),
+      });
+      if (!response.ok) {
+        setErrors([]);
+      } else {
+        const body = await response.json();
+        console.log(body);
+        setCharacterData({ ...characterData, stats: body.character.stats });
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`);
+    }
+  };
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log("submit");
+    incrementExperience(characterData.stats[relevantStat]);
+  };
+
+  const onSubmitHandler2 = (event, relevantStat, action) => {
+    event.preventDefault();
+    console.log("submit", relevantStat, action);
+    modifyStats(relevantStat, characterData.stats[relevantStat], action);
+  };
+
+  const increment = () => {
+    return (
+      <>
+        <form onSubmit={onSubmitHandler}>
+          <input className="button" type="submit" value="Mark Experience" />
+        </form>
+      </>
+    );
+  };
+
+  const allButtons = ButtonInformation.buttonInfo.map((button) => {
+    console.log(
+      button.action,
+      button.action !== "decrement",
+      characterData.stats[button.relevantStat] !== 0
+    );
+    if (button.id === 3 && characterData.stats.harm === 0) {
+      return null;
+    } else {
+      return (
+        <StatChangeButton
+          key={button.id}
+          text={button.text}
+          relevantStat={button.relevantStat}
+          action={button.action}
+          onSubmit={(e) => onSubmitHandler2(e, button.relevantStat, button.action)}
+        />
+      );
+    }
+  });
+
   return (
     <>
       <div className="table-top">
@@ -77,6 +174,8 @@ const CharacterSheet = (props) => {
             <div className="column">
               <h4 className="flavor">Stats</h4>
               <StatsList stats={characterData.stats} />
+              {/* <div>{increment()}</div> */}
+              <div className="center">{allButtons}</div>
             </div>
             <div className="column">
               <div>
