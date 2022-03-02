@@ -6,7 +6,7 @@ Please note, the **Monster of the Week Interactive Character Sheet** is currentl
 
 This project was developed in Javascript, React, NodeJs, and Express with a PostGres database designed using Knex and Objection. It was developed after completing the core curriculum at Launch Academy, a boot-camp in Boston with a comprehensive curriculum to teach the basics of Javascript and Web App development. A minimum viable product was produced in a two week period, and I have been adding onto the project since then.
 
-The live version is currently available at [motw-character-sheet.herokuapp.com](motw-character-sheet.herokuapp.com)
+The live version is currently available at [motw-character-sheet.herokuapp.com](https://motw-character-sheet.herokuapp.com)
 
 ## Running the App
 
