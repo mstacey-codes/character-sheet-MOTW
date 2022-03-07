@@ -16,7 +16,7 @@ The live version is currently available at [motw-character-sheet.herokuapp.com](
 
 The database is designed to work with Postgres/SQL. Create the database using
 
-> $ createdb pastabilities_development
+> $ createdb characterSheetMOTW_development
 
 Run the following commands in your server folder to populate the database with some of the necessary data and some sample user profiles:
 
