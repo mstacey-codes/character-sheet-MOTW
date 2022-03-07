@@ -7,6 +7,10 @@ import {
   faDumbbell,
   faCrow,
   faHeart,
+  faHeartBroken,
+  faClover,
+  faArrowTrendUp,
+  faExclamationCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import StatTile from "./StatTile";
@@ -59,9 +63,24 @@ const StatsTile = ({ stats }) => {
 
   let harmIconClassName;
   let harmIcon;
-  if (stats.harm >= 4) {
-    harmIconClassName = "fa-solid fa-heart";
+  let unstable;
+  if (stats.harm <= 4) {
+    harmIconClassName = "fa-solid fa-heart fa-xl small-pad";
     harmIcon = faHeart;
+  } else {
+    harmIconClassName = "fa-solid fa-heart-broken fa-xl small-pad";
+    harmIcon = faHeartBroken;
+    unstable = (
+      <>
+        <FontAwesomeIcon
+          className="fa-solid fa-circle-exclamation fa-lg"
+          icon={faExclamationCircle}
+        />
+        <h6>
+          <strong>Unstable</strong>
+        </h6>
+      </>
+    );
   }
 
   return (
@@ -71,17 +90,24 @@ const StatsTile = ({ stats }) => {
           <ul className="no-bullets">{characterModifiers}</ul>
         </div>
         <ul className="no-bullets">
-          <li>
+          <li className="stat-grid">
+            <FontAwesomeIcon className="fa-solid fa-clover fa-xl small-pad" icon={faClover} />
             <h5>
               <strong>Luck: {stats.luck}/7</strong>
             </h5>
           </li>
-          <li>
+          <li className="stat-grid">
+            <FontAwesomeIcon className={harmIconClassName} icon={harmIcon} />
             <h5>
               <strong>Harm: {stats.harm}/7</strong>
             </h5>
+            {unstable}
           </li>
-          <li>
+          <li className="stat-grid">
+            <FontAwesomeIcon
+              className="fa-solid fa-arrow-trend-up fa-xl small-pad"
+              icon={faArrowTrendUp}
+            />
             <h5>
               <strong>Experience: {stats.experience % 5}</strong>
             </h5>

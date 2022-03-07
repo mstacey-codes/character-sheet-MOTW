@@ -64,13 +64,6 @@ const CharacterSheet = (props) => {
   }
 
   const modifyStats = async (statType, currentStat, action) => {
-    // let change;
-    // if (action === "increment") {
-    //   change = 1;
-    // } else {
-    //   change = -1;
-    // }
-    // const newValue = currentStat + change;
     const modifyStatsData = {
       stat: statType,
       currentStat: currentStat,
@@ -82,7 +75,6 @@ const CharacterSheet = (props) => {
         headers: new Headers({
           "Content-Type": "application/json",
         }),
-        // body: JSON.stringify({ [statType]: newValue }),
         body: JSON.stringify({ modifyStatsData }),
       });
       if (!response.ok) {
@@ -104,7 +96,10 @@ const CharacterSheet = (props) => {
   };
 
   const allButtons = ButtonInformation.buttonInfo.map((button) => {
-    if (button.id === 3 && characterData.stats.harm === 0) {
+    if (button.id === "heal" && characterData.stats.harm === 0) {
+      return null;
+    }
+    if (button.id === "harm" && characterData.stats.harm === 7) {
       return null;
     } else {
       return (
@@ -130,10 +125,10 @@ const CharacterSheet = (props) => {
         <br />
         <br />
         <div className="character-sheet basic-margins">
+          <br />
           <h1>
             {characterData.name} {characterData.hunterType}
           </h1>
-          <br />
           <br />
           <LookList look={characterData.look} />
 
