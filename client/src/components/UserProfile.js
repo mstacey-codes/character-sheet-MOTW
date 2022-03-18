@@ -37,13 +37,71 @@ const UserProfile = ({ user }) => {
     });
   }
 
+  const allCharacters = characters.reduce((memo, current) => {
+    if (!memo[current.status]) {
+      return { ...memo, [current.status]: [current] };
+    } else {
+      memo[current.status].push(current);
+      return memo;
+    }
+  }, {});
+
+  const characterDisplay = () => {
+    if (!characters[0]) {
+      return <h2>Create a new character to start the hunt.</h2>;
+    }
+    const allCharactersByStatus = characters.reduce((memo, current) => {
+      if (!memo[current.status]) {
+        return { ...memo, [current.status]: [current] };
+      } else {
+        memo[current.status].push(current);
+        return memo;
+      }
+    }, {});
+    let dividedCharacterDisplay;
+    const aliveCharactersOkay = allCharactersByStatus.alive.map((character) => {
+      return <CharacterTile key={character.id} {...character} />;
+    });
+    // if (allCharactersByStatus.alive) {
+    //   const aliveCharacters = allCharactersByStatus.alive.map((character) => {
+    //     return <CharacterTile key={character.id} {...character} />;
+    //   });
+    //   dividedCharacterDisplay += (
+    //     <div>
+    //       <h2>Active Hunters</h2>
+    //       <div className="grid-column-4">{aliveCharacters}</div>
+    //     </div>
+    //   );
+    // }
+    // if (allCharactersByStatus.deceased) {
+    //   const deceasedCharacters = allCharactersByStatus.deceased.map((character) => {
+    //     return <CharacterTile key={character.id} {...character} />;
+    //   });
+    //   // dividedCharacterDisplay += (
+    //   //   <div>
+    //   //     <h2>The Graveyard</h2>
+    //   //     <div className="grid-column-4">{deceasedCharacters}</div>
+    //   //   </div>
+    //   // );
+    // }
+    return (
+      <div>
+        <h2>Active Hunters:</h2>
+        <div className="grid-column-4">{aliveCharactersOkay}</div>
+      </div>
+    );
+  };
+
+  console.log(allCharacters);
+
   return (
     <>
       <div className="basic-margins">
         <div className="clean-box">
           <div className="clean-box">
             <h1>Welcome {user.email}</h1>
-            <div className="grid-column-4">{allUserCharacters}</div>
+            {characterDisplay()}
+            {/* <div className="grid-column-4">{allUserCharacters}</div> */}
 
             <br />
             <br />

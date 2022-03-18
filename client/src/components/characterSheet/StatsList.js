@@ -83,6 +83,16 @@ const StatsTile = ({ stats }) => {
     );
   }
 
+  let levelUpMessage;
+  if (stats.experience / 5 >= 1) {
+    levelUpMessage = (
+      <h6 style={{ marginBottom: "10px" }}>
+        This hunter can level up {Math.trunc(stats.experience / 5)} times. Please wait for future
+        developments.
+      </h6>
+    );
+  }
+
   return (
     <>
       <div>
@@ -113,6 +123,7 @@ const StatsTile = ({ stats }) => {
             </h5>
           </li>
         </ul>
+        {levelUpMessage}
       </div>
     </>
   );

@@ -11,7 +11,8 @@ body .table-top {
 }
 
 body {
-  background-image: url(https://images.pexels.com/photos/6149690/pexels-photo-6149690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  // background-image: url(https://images.pexels.com/photos/6149690/pexels-photo-6149690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-image: url(https://img.freepik.com/free-vector/watercolor-halloween-background_52683-43697.jpg?t=st=1646669134~exp=1646669734~hmac=f9d384d9565f78061c063045d120d7526c03fd3bca160a54cbd8ecf356f4b289&w=1380);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -29,6 +30,7 @@ body {
   padding: 2%;
   background-color: #ffffff99;
 }
+
 .character-sheet {
   background-color: white;
   min-height: 77%;
@@ -143,7 +145,7 @@ ul.no-bullets {
 
 .stat-grid {
   display: grid;
-  grid-template-columns: 50px auto;
+  grid-template-columns: 35px auto;
 }
 .grid-column-2 {
   text-align: center;
@@ -176,7 +178,7 @@ ul.no-bullets {
 .grid-column-3-character {
   text-align: left;
   display: grid;
-  grid-template-columns: 20% 40% 40%;
+  grid-template-columns: 26% 36% 36%;
   padding-top: 1%;
   padding-bottom: 1%;
   padding-right: 2%;

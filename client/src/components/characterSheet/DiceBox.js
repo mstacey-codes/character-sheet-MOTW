@@ -83,6 +83,5 @@ const DiceBox = ({ result, clearResult }) => {
     </>
   );
 };
-<i class="fa-solid fa-dice-five"></i>;
 
 export default DiceBox;

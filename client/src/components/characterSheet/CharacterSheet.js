@@ -4,8 +4,7 @@ import StatsList from "./StatsList.js";
 import MovesList from "./MovesList.js";
 import LookList from "./LookList.js";
 import BasicMoveList from "./BasicMovesList.js";
-import ButtonInformation from "../../constants/ButtonInformation.json";
-import StatChangeButton from "./StatButton.js";
+import IncrementerList from "./IncrementerList.js";
 
 const CharacterSheet = (props) => {
   if (!props.user) {
@@ -37,18 +36,30 @@ const CharacterSheet = (props) => {
     getCharacter();
   }, []);
 
-  if (!characterData.look || !characterData.stats || !characterData.moves) {
+  if (
+    !characterData.look ||
+    !characterData.stats ||
+    !characterData.moves ||
+    !characterData.status
+  ) {
     return null;
   }
 
+  let aliveOrDead;
+  if (characterData.status === "deceased") {
+    aliveOrDead = { textDecoration: "line-through" };
+  }
   // let classTraits;
   // if (characterData.classTraits.mission) {
   //   classTraits = <>The Chosen has a mission: {characterData.classTraits.mission}</>;
   // }
 
+  //Basic Moves Form
   let basicMoves;
-  if (characterData.userId === currentUser.id) {
+  if (characterData.userId === currentUser.id && characterData.status !== "deceased") {
     basicMoves = <BasicMoveList stats={characterData.stats} />;
+  } else if (characterData.status === "deceased") {
+    basicMoves = <p>This character is deceased and can no longer be modified</p>;
   } else {
     basicMoves = (
       <p>
@@ -59,7 +70,11 @@ const CharacterSheet = (props) => {
   }
 
   let linkToMoveForm;
-  if (characterData.moves.length === 0 && characterData.userId === currentUser.id) {
+  if (
+    characterData.moves.length === 0 &&
+    characterData.userId === currentUser.id &&
+    characterData.status !== "deceased"
+  ) {
     linkToMoveForm = <Link to={`/new-character/${characterId}`}>Fill out your moves</Link>;
   }
 
@@ -89,35 +104,40 @@ const CharacterSheet = (props) => {
     }
   };
 
-  const onSubmitHandler = (event, relevantStat, action) => {
+  const onChangeStatsSubmitHandler = (event, relevantStat, action) => {
     event.preventDefault();
     console.log("submit", relevantStat, action);
     modifyStats(relevantStat, characterData.stats[relevantStat], action);
   };
 
-  const allButtons = ButtonInformation.buttonInfo.map((button) => {
-    if (button.id === "heal" && characterData.stats.harm === 0) {
-      return null;
+  const changeCharacterStatus = async () => {
+    const changeCharacterStatus = {
+      status: "deceased",
+    };
+    try {
+      const response = await fetch(`/api/v1/characters/${characterId}`, {
+        method: "PATCH",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify({ changeCharacterStatus }),
+      });
+      if (!response.ok) {
+        setErrors([]);
+      } else {
+        const body = await response.json();
+        console.log(body);
+        setCharacterData({ ...characterData, status: body.character.status });
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`);
     }
-    if (button.id === "harm" && characterData.stats.harm === 7) {
-      return null;
-    } else {
-      return (
-        <StatChangeButton
-          key={button.id}
-          text={button.text}
-          relevantStat={button.relevantStat}
-          action={button.action}
-          onSubmit={(e) => onSubmitHandler(e, button.relevantStat, button.action)}
-        />
-      );
-    }
-  });
+  };
 
-  let statChangeButtons;
-  if (characterData.userId === currentUser.id) {
-    statChangeButtons = allButtons;
-  }
+  const onKillCharacterSubmitHandler = (event) => {
+    event.preventDefault();
+    changeCharacterStatus();
+  };
 
   return (
     <>
@@ -126,7 +146,7 @@ const CharacterSheet = (props) => {
         <br />
         <div className="character-sheet basic-margins">
           <br />
-          <h1>
+          <h1 style={aliveOrDead}>
             {characterData.name} {characterData.hunterType}
           </h1>
           <br />
@@ -136,7 +156,13 @@ const CharacterSheet = (props) => {
             <div className="column">
               <h4 className="flavor">Stats</h4>
               <StatsList stats={characterData.stats} />
-              <div className="center">{statChangeButtons}</div>
+              <div className="center">
+                <IncrementerList
+                  characterData={characterData}
+                  onChangeStatsSubmitHandler={onChangeStatsSubmitHandler}
+                  onKillCharacterSubmitHandler={onKillCharacterSubmitHandler}
+                />
+              </div>
             </div>
             <div className="column">
               <div>

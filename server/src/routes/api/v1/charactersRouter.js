@@ -62,22 +62,40 @@ charactersRouter.get("/:charId", async (req, res) => {
 charactersRouter.patch("/:charId", async (req, res) => {
   const characterIndex = req.params.charId;
   const character = await Character.query().findById(characterIndex);
-  const { stat, action } = req.body.modifyStatsData;
-  const currentStatFromDb = character[stat];
-  let actionEffect = 1;
-  if (action === "decrement") {
-    actionEffect = -1;
+
+  if (req.body.modifyStatsData) {
+    const { stat, action } = req.body.modifyStatsData;
+    const currentStatFromDb = character[stat];
+    let actionEffect = 1;
+    if (action === "decrement") {
+      actionEffect = -1;
+    }
+    const replaceStat = { [stat]: currentStatFromDb + actionEffect };
+    try {
+      console.log("pause");
+      await character.$query().patchAndFetch(replaceStat);
+      // console.log("character: ", character);
+      const serializedCharacter = await CharacterSerializer.getDetails(character);
+      return res.status(200).json({ character: serializedCharacter });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ errors: error });
+    }
   }
-  const replaceStat = { [stat]: currentStatFromDb + actionEffect };
-  try {
-    console.log("pause");
-    await character.$query().patchAndFetch(replaceStat);
-    console.log("character: ", character);
-    const serializedCharacter = await CharacterSerializer.getDetails(character);
-    return res.status(200).json({ character: serializedCharacter });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ errors: error });
+
+  if (req.body.changeCharacterStatus) {
+    const newStatus = req.body.changeCharacterStatus.status;
+    try {
+      console.log("killing you quietly");
+      await character.$query().patchAndFetch({ status: newStatus });
+      const serializedCharacter = await CharacterSerializer.getDetails(character);
+      console.log("character: ", character);
+
+      return res.status(200).json({ character: serializedCharacter });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ errors: error });
+    }
   }
 });
 
