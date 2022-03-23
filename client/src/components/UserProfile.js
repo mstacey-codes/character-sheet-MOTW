@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CharacterTile from "./CharacterTile.js";
+import CharactersList from "./CharactersList.js";
 import { Link } from "react-router-dom";
 
 const UserProfile = ({ user }) => {
@@ -8,7 +8,7 @@ const UserProfile = ({ user }) => {
     return null;
   }
 
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState(null);
 
   const getCharacters = async () => {
     try {
@@ -19,7 +19,19 @@ const UserProfile = ({ user }) => {
         throw error;
       }
       const body = await response.json();
-      setCharacters(body.user.characters);
+      if (body.user.characters.length === 0) {
+        setCharacters([]);
+      } else {
+        const allCharacters = body.user.characters.reduce((memo, current) => {
+          if (!memo[current.status]) {
+            return { ...memo, [current.status]: [current] };
+          } else {
+            memo[current.status].push(current);
+            return memo;
+          }
+        }, {});
+        setCharacters(allCharacters);
+      }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
@@ -28,13 +40,13 @@ const UserProfile = ({ user }) => {
     getCharacters();
   }, []);
 
-  let allUserCharacters;
-  if (!characters[0]) {
-    allUserCharacters = "You have not created any characters yet. Create your new character.";
-  } else {
-    allUserCharacters = characters.map((character) => {
-      return <CharacterTile key={character.id} {...character} />;
-    });
+  if (!characters) {
+    return null;
+  }
+
+  let ifNoUserCharacters;
+  if (characters.alive.length === 0 || characters.length === 0) {
+    ifNoUserCharacters = <h2>"You have no active characters"</h2>;
   }
 
   return (
@@ -43,10 +55,11 @@ const UserProfile = ({ user }) => {
         <div className="clean-box">
           <div className="clean-box">
             <h1>Welcome {user.email}</h1>
-            <div className="grid-column-4">{allUserCharacters}</div>
+            {ifNoUserCharacters}
 
-            <br />
-            <br />
+            <div>
+              <CharactersList characters={characters} />
+            </div>
             <div>
               <Link to="/new-character">
                 <h2 className="flavor">Create a New Character</h2>

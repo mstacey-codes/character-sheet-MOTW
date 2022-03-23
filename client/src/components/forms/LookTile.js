@@ -1,6 +1,6 @@
 import React from "react";
 
-const LookTile = ({ look, name, id, handleInputChangeLook, isChecked }) => {
+const LookTile = ({ look, name, handleInputChangeLook, isChecked }) => {
   return (
     <div>
       <label>

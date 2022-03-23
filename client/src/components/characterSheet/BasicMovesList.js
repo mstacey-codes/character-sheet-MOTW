@@ -18,7 +18,7 @@ const BasicMoveList = ({ stats }) => {
     let foundMove = BasicMoveJSON.basic_moves.find((element) => element.id === moveId);
     const statInUse = stats[foundMove.stat];
     const total = die1 + die2 + statInUse;
-    let message = `You used ${foundMove.name} with a ${foundMove.stat} modifier of ${statInUse}. \n Your total is: ${total} `;
+    let message = `You used ${foundMove.name} with a ${foundMove.stat} modifier of ${statInUse}. Your total is: ${total} `;
     let result;
     if (total <= 6) {
       result = `${foundMove.failed}`;

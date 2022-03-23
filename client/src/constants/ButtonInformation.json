@@ -1,0 +1,13 @@
+{
+  "buttonInfo": [
+    {
+      "id": "exp",
+      "text": "Mark 1 Experience",
+      "relevantStat": "experience",
+      "action": "increment"
+    },
+    { "id": "harm", "text": "Take 1 Harm", "relevantStat": "harm", "action": "increment" },
+    { "id": "heal", "text": "Heal 1 Harm", "relevantStat": "harm", "action": "decrement" },
+    { "id": "luck", "text": "Use 1 Luck", "relevantStat": "luck", "action": "decrement" }
+  ]
+}

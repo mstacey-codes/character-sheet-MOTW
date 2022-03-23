@@ -592,7 +592,7 @@ class MoveSeeder {
         index: "wrongedNEVERAGAIN",
         name: "NEVER AGAIN!",
         description:
-          "In combat, you may choose to protect someone without rolling, as if you had rolled a 10+, but you may not choose to “suffer little harm.",
+          'In combat, you may choose to protect someone without rolling, as if you had rolled a 10+, but you may not choose to "suffer little harm".',
       },
       {
         index: "wrongedWhatDoesNotKillMe",
@@ -618,6 +618,12 @@ class MoveSeeder {
         name: "Tools Matter",
         description:
           "With your signature weapon (see your gear, below), you get +1 to kick some ass.",
+      },
+      {
+        index: "wrongedFervor",
+        name: "Fervor",
+        description: "When you manipulate someone, roll +Tough instead of +Charm.",
+        relatedStat: "tough",
       },
     ];
     for (const singleMoveData of moveData) {
