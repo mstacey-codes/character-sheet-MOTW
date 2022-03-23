@@ -54,7 +54,7 @@ const CharacterSheet = (props) => {
   //   classTraits = <>The Chosen has a mission: {characterData.classTraits.mission}</>;
   // }
 
-  //Basic Moves Form
+  //Basic Moves
   let basicMoves;
   if (characterData.userId === currentUser.id && characterData.status !== "deceased") {
     basicMoves = <BasicMoveList stats={characterData.stats} />;
@@ -96,7 +96,6 @@ const CharacterSheet = (props) => {
         setErrors([]);
       } else {
         const body = await response.json();
-        console.log(body);
         setCharacterData({ ...characterData, stats: body.character.stats });
       }
     } catch (error) {
@@ -106,7 +105,6 @@ const CharacterSheet = (props) => {
 
   const onChangeStatsSubmitHandler = (event, relevantStat, action) => {
     event.preventDefault();
-    console.log("submit", relevantStat, action);
     modifyStats(relevantStat, characterData.stats[relevantStat], action);
   };
 
@@ -126,7 +124,6 @@ const CharacterSheet = (props) => {
         setErrors([]);
       } else {
         const body = await response.json();
-        console.log(body);
         setCharacterData({ ...characterData, status: body.character.status });
       }
     } catch (error) {

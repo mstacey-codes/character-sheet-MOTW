@@ -23,7 +23,7 @@ const IncrementerList = ({
           text={text}
           relevantStat={relevantStat}
           action={action}
-          onSubmit={(e) => onChangeStatsSubmitHandler(e, button.relevantStat, button.action)}
+          onSubmit={(e) => onChangeStatsSubmitHandler(e, relevantStat, action)}
         />
       );
     }

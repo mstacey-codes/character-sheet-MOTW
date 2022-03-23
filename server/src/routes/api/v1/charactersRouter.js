@@ -72,9 +72,7 @@ charactersRouter.patch("/:charId", async (req, res) => {
     }
     const replaceStat = { [stat]: currentStatFromDb + actionEffect };
     try {
-      console.log("pause");
       await character.$query().patchAndFetch(replaceStat);
-      // console.log("character: ", character);
       const serializedCharacter = await CharacterSerializer.getDetails(character);
       return res.status(200).json({ character: serializedCharacter });
     } catch (error) {
@@ -86,11 +84,8 @@ charactersRouter.patch("/:charId", async (req, res) => {
   if (req.body.changeCharacterStatus) {
     const newStatus = req.body.changeCharacterStatus.status;
     try {
-      console.log("killing you quietly");
       await character.$query().patchAndFetch({ status: newStatus });
       const serializedCharacter = await CharacterSerializer.getDetails(character);
-      console.log("character: ", character);
-
       return res.status(200).json({ character: serializedCharacter });
     } catch (error) {
       console.log(error);
