@@ -119,6 +119,7 @@ const CharacterCreationForm = ({ user }) => {
   if (characterData.hunterIndex === "") {
     return null;
   }
+
   const chosenHunter = hunterData.find((hunterElement) => {
     return hunterElement.index === characterData.hunterIndex;
   });

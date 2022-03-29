@@ -1,6 +1,6 @@
 class UserCharacterSerializer {
   static async getSummary(character) {
-    const allowedAttributes = ["id", "name", "hunterIndex"];
+    const allowedAttributes = ["id", "name", "hunterIndex", "status"];
     let serializedCharacter = {};
     for (const attribute of allowedAttributes) {
       serializedCharacter[attribute] = character[attribute];
